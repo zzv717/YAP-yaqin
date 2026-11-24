@@ -1,8 +1,5 @@
 node_modules/
 .next/
-.env
-.env.*
+.env*
 !.env.example
-yaqin-data.json
-uploads/
-.config/
+*.log
