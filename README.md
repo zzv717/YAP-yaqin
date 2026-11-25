@@ -10,7 +10,8 @@
 ## Vercel setup
 - Import this repository and set Root Directory to `yaqin-next` if this folder is inside a larger repository.
 - Add `DATABASE_URL` in Project Settings → Environment Variables for Production, Preview, and Development.
-- Redeploy after setting the variable.
+- Add `MERCHANT_PANEL_PASSWORD` with a long unique secret in the same settings (never put it in GitHub).
+- Redeploy after setting both variables.
 
 ## Current scope
 The product list reads from Neon and customer reservations are written to `orders`, decrementing inventory atomically. Online payments, SMS verification, Google Maps, and authenticated merchant management are not implemented yet. Do not expose a real customer-facing production site until access control, rate limiting, privacy/retention policy, and merchant workflows are added.
