@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { cookies } from 'next/headers';
-const COOKIE = 'yaqin_admin';
+const COOKIE = 'korchi_admin';
 function secret() { return process.env.MERCHANT_PANEL_PASSWORD || ''; }
 function sign(exp: string) { return createHmac('sha256', secret()).update(exp).digest('hex'); }
 export async function isPanelAdmin() {

@@ -10,4 +10,4 @@ export async function POST(request: Request) {
   const cookie = createPanelCookie(); const response = NextResponse.json({ authenticated: true });
   response.cookies.set(cookie.name, cookie.value, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', path: '/', maxAge: cookie.maxAge }); return response;
 }
-export async function DELETE() { const response = NextResponse.json({ authenticated: false }); response.cookies.set('yaqin_admin','',{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'strict',path:'/',maxAge:0}); return response; }
+export async function DELETE() { const response = NextResponse.json({ authenticated: false }); response.cookies.set('korchi_admin','',{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'strict',path:'/',maxAge:0}); return response; }

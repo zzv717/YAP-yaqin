@@ -1,10 +1,22 @@
 -- Run this once in the Neon SQL Editor (choose the production branch).
+CREATE TABLE IF NOT EXISTS stores (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  address TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  rating NUMERIC(2,1) NOT NULL DEFAULT 0,
+  is_demo BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 CREATE TABLE IF NOT EXISTS products (
   id BIGSERIAL PRIMARY KEY,
   category TEXT NOT NULL,
   emoji TEXT NOT NULL DEFAULT '🍱',
   photo TEXT NOT NULL DEFAULT 'p1',
   image_url TEXT,
+  store_id BIGINT REFERENCES stores(id),
+  expires_on DATE,
+  is_demo BOOLEAN NOT NULL DEFAULT FALSE,
   business TEXT NOT NULL,
   name TEXT NOT NULL,
   description TEXT NOT NULL DEFAULT '',
