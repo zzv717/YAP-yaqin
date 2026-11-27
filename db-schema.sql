@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS products (
   distance TEXT NOT NULL DEFAULT '1.0 km',
   pickup_time TEXT NOT NULL DEFAULT 'Bugun',
   qty INTEGER NOT NULL DEFAULT 0 CHECK (qty >= 0),
+  qty_unit TEXT NOT NULL DEFAULT 'ta',
   active BOOLEAN NOT NULL DEFAULT TRUE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -24,6 +25,7 @@ CREATE TABLE IF NOT EXISTS orders (
   business TEXT NOT NULL,
   customer_phone TEXT NOT NULL,
   price INTEGER NOT NULL CHECK (price > 0),
+  qty_unit TEXT NOT NULL DEFAULT 'ta',
   status TEXT NOT NULL DEFAULT 'Yangi' CHECK (status IN ('Yangi','Tasdiqlandi','Bekor qilindi')),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
