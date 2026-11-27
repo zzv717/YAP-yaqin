@@ -35,10 +35,25 @@ CREATE TABLE IF NOT EXISTS orders (
   product_id BIGINT NOT NULL REFERENCES products(id),
   product_name TEXT NOT NULL,
   business TEXT NOT NULL,
+  customer_name TEXT NOT NULL DEFAULT 'Demo mijoz',
   customer_phone TEXT NOT NULL,
+  pickup_address TEXT NOT NULL DEFAULT 'Manzil hamkordan aniqlanadi',
+  quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity > 0),
+  tracking_token TEXT NOT NULL UNIQUE,
   price INTEGER NOT NULL CHECK (price > 0),
   qty_unit TEXT NOT NULL DEFAULT 'ta',
-  status TEXT NOT NULL DEFAULT 'Yangi' CHECK (status IN ('Yangi','Tasdiqlandi','Bekor qilindi')),
+  status TEXT NOT NULL DEFAULT 'Yangi' CHECK (status IN ('Yangi','Tasdiqlandi','Olib ketildi','Bekor qilindi')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE TABLE IF NOT EXISTS order_items (
+  id BIGSERIAL PRIMARY KEY,
+  order_id BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id BIGINT NOT NULL REFERENCES products(id),
+  product_name TEXT NOT NULL,
+  business TEXT NOT NULL,
+  quantity INTEGER NOT NULL CHECK (quantity > 0),
+  qty_unit TEXT NOT NULL DEFAULT 'ta',
+  unit_price INTEGER NOT NULL CHECK (unit_price > 0),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 CREATE INDEX IF NOT EXISTS orders_created_at_idx ON orders(created_at DESC);

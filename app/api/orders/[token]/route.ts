@@ -1,0 +1,4 @@
+import { neon } from '@neondatabase/serverless';
+import { NextResponse } from 'next/server';
+export const runtime='nodejs';
+export async function GET(_:Request,{params}:{params:Promise<{token:string}>}){if(!process.env.DATABASE_URL)return NextResponse.json({error:'DATABASE_URL sozlanmagan'},{status:503});const {token}=await params;if(!/^[a-f0-9-]{36}$/.test(token))return NextResponse.json({error:'Buyurtma topilmadi'},{status:404});try{const sql=neon(process.env.DATABASE_URL);const rows=await sql`SELECT id,product_name AS product,business,pickup_address AS "pickupAddress",quantity,qty_unit AS unit,price,status,created_at AS "createdAt" FROM orders WHERE tracking_token=${token} LIMIT 1`;if(!rows.length)return NextResponse.json({error:'Buyurtma topilmadi'},{status:404});return NextResponse.json(rows[0])}catch{return NextResponse.json({error:'Buyurtma holatini olib bo‘lmadi'},{status:503})}}
