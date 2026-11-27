@@ -11,7 +11,8 @@
 - Import this repository and set Root Directory to `yaqin-next` if this folder is inside a larger repository.
 - Add `DATABASE_URL` in Project Settings → Environment Variables for Production, Preview, and Development.
 - Add `MERCHANT_PANEL_PASSWORD` with a long unique secret in the same settings (never put it in GitHub).
-- Redeploy after setting both variables.
+- Create a Vercel Blob store and add its `BLOB_READ_WRITE_TOKEN` in the project settings for image uploads.
+- Redeploy after setting the variables. Run `db-migration-image.sql` once in Neon to enable product image URLs.
 
 ## Current scope
-The product list reads from Neon and customer reservations are written to `orders`, decrementing inventory atomically. Online payments, SMS verification, Google Maps, and authenticated merchant management are not implemented yet. Do not expose a real customer-facing production site until access control, rate limiting, privacy/retention policy, and merchant workflows are added.
+The product list reads from Neon and customer reservations are written to `orders`, decrementing inventory atomically. The single admin merchant panel can add offers, review orders, and manage listings. Product photos use Vercel Blob. Online payments, SMS verification, Google Maps, and separate accounts for each merchant are not implemented yet; add those before a broad public launch.

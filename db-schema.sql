@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS products (
   category TEXT NOT NULL,
   emoji TEXT NOT NULL DEFAULT '🍱',
   photo TEXT NOT NULL DEFAULT 'p1',
+  image_url TEXT,
   business TEXT NOT NULL,
   name TEXT NOT NULL,
   description TEXT NOT NULL DEFAULT '',
